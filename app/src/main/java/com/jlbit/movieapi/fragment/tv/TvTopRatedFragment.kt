@@ -1,4 +1,4 @@
-package com.jlbit.movieapi.fragment
+package com.jlbit.movieapi.fragment.tv
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -19,7 +19,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class TvPopularFragment : Fragment() {
+class TvTopRatedFragment : Fragment() {
     private lateinit var mainActivity: MainActivity
     private lateinit var request: Request
     private lateinit var tvList: TvList
@@ -29,7 +29,7 @@ class TvPopularFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        val v = inflater.inflate(R.layout.fragment_popular, container, false)
+        val v = inflater.inflate(R.layout.fragment_toprated, container, false)
 
         mainActivity = activity as MainActivity
         request = Request(context!!)
@@ -52,14 +52,14 @@ class TvPopularFragment : Fragment() {
     }
 
     private fun getTvList(api_key: String, language: String, page: Int){
-        val call = request.retrofit().getTvPopular(api_key, language, page)
+        val call = request.retrofit().getTvTopRated(api_key, language, page)
 
         call.enqueue(object : Callback<TvList> {
             override fun onResponse(call: Call<TvList>, response: Response<TvList>) {
                 if(response.isSuccessful){
 
                     tvList = response.body()!!
-                    recyclerView.adapter = TvAdapter(tvList.results, mainActivity, request, 1)
+                    recyclerView.adapter = TvAdapter(tvList.results, mainActivity, request, 2)
 
                 }else longToast("${response.code()}: ${response.message()}")
             }

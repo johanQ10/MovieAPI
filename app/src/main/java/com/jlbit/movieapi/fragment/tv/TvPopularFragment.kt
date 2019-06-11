@@ -1,4 +1,4 @@
-package com.jlbit.movieapi.fragment
+package com.jlbit.movieapi.fragment.tv
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -10,31 +10,31 @@ import android.view.View
 import android.view.ViewGroup
 import com.jlbit.movieapi.MainActivity
 import com.jlbit.movieapi.R
-import com.jlbit.movieapi.adapter.MoviesAdapter
+import com.jlbit.movieapi.adapter.TvAdapter
 import com.jlbit.movieapi.client.Request
-import com.jlbit.movieapi.model.MovieList
+import com.jlbit.movieapi.model.TvList
 import kotlinx.android.synthetic.main.fragment_popular.view.*
 import org.jetbrains.anko.support.v4.longToast
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class MovieTopRatedFragment : Fragment() {
+class TvPopularFragment : Fragment() {
     private lateinit var mainActivity: MainActivity
     private lateinit var request: Request
-    private lateinit var movieList: MovieList
+    private lateinit var tvList: TvList
     private var page: Int = 1
 
     private lateinit var recyclerView: RecyclerView
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        val v = inflater.inflate(R.layout.fragment_toprated, container, false)
+        val v = inflater.inflate(R.layout.fragment_popular, container, false)
 
         mainActivity = activity as MainActivity
         request = Request(context!!)
 
-        mainActivity.actionBar.title = "   ${getString(R.string.movies)}     "
+        mainActivity.actionBar.title = "   ${getString(R.string.tv_series)}"
 
         recyclerView = v.recycler_view
 
@@ -46,24 +46,24 @@ class MovieTopRatedFragment : Fragment() {
 
         recyclerView.layoutManager = LinearLayoutManager(context)
 
-        getMovieList(request.apiKey,"",page,"")
+        getTvList(request.apiKey,"",page)
 
         return v
     }
 
-    private fun getMovieList(api_key: String, language: String, page: Int, region: String){
-        val call = request.retrofit().getMovieTopRated(api_key, language, page, region)
+    private fun getTvList(api_key: String, language: String, page: Int){
+        val call = request.retrofit().getTvPopular(api_key, language, page)
 
-        call.enqueue(object : Callback<MovieList> {
-            override fun onResponse(call: Call<MovieList>, response: Response<MovieList>) {
+        call.enqueue(object : Callback<TvList> {
+            override fun onResponse(call: Call<TvList>, response: Response<TvList>) {
                 if(response.isSuccessful){
 
-                    movieList = response.body()!!
-                    recyclerView.adapter = MoviesAdapter(movieList.results, mainActivity, request, 2)
+                    tvList = response.body()!!
+                    recyclerView.adapter = TvAdapter(tvList.results, mainActivity, request, 1)
 
                 }else longToast("${response.code()}: ${response.message()}")
             }
-            override fun onFailure(call: Call<MovieList>, t: Throwable) {
+            override fun onFailure(call: Call<TvList>, t: Throwable) {
                 longToast(t.message.toString())
             }
         })

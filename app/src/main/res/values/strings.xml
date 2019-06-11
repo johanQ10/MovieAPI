@@ -1,10 +1,15 @@
 <resources>
     <string name="app_name">MovieAPI</string>
     <string name="web_name">The Movie DB API</string>
+
+    <string name="movies">Movies</string>
+    <string name="tv_series">TV shows</string>
+    <string name="tv">TV</string>
+
     <string name="popular">Popular</string>
     <string name="top_rated">Top Rated</string>
     <string name="upcoming">Upcoming</string>
-    <string name="image_item">Image Item</string>
+
     <string name="overview">Overview:</string>
     <string name="name">Name:</string>
     <string name="date">Date:</string>
@@ -14,13 +19,27 @@
     <string name="average_votes">Average votes</string>
     <string name="language">Language:</string>
     <string name="web">Web:</string>
+    <string name="options">Options</string>
+    <string name="search">Search</string>
+    <string name="sort_by">Sort by:</string>
+    <string name="genres">Genres:</string>
+    <string name="include_adult">Include adult content:</string>
+    <string name="with_videos">With videos:</string>
+    <string name="year">Year:</string>
+    <string name="first_air_date_year">First air date year:</string>
+    <string name="original_language">Original language:</string>
+
+    <string name="hint_year">2010</string>
+    <string name="hint_genres">Action, Drama, Horror</string>
+    <string name="hint_sortby">Vote average (Asc)</string>
+    <string name="hint_language">en|fr|es|ja</string>
+
+    <string name="image_item">Image Item</string>
     <string name="image_web">Image web</string>
     <string name="image_title">Image title</string>
     <string name="image_date">Image date</string>
     <string name="image_language">Image language</string>
-    <string name="options">Options</string>
-    <string name="movies">Movies</string>
     <string name="image_tv">Image tv</string>
     <string name="image_movie">Image movie</string>
-    <string name="tv_series">TV shows</string>
+    <string name="image_sortby">Image sortby</string>
 </resources>

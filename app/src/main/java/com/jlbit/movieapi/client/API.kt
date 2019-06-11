@@ -49,6 +49,24 @@ interface API {
         @Query("language") language: String
     ): Call<Videos>
 
+    @GET("genre/movie/list")
+    fun getMovieGenres(
+        @Query("api_key") api_key: String,
+        @Query("language") language: String
+    ): Call<Genres>
+
+    @GET("discover/movie")
+    fun getDiscoverMovies(
+        @Query("api_key") api_key: String,
+        @Query("sort_by") sort_by: String,
+        @Query("include_adult") include_adult: Boolean,
+        @Query("include_video") include_video: Boolean,
+        @Query("page") page: Int,
+        @Query("with_genres") with_genres: String,
+        @Query("year") year: Int?,
+        @Query("with_original_language") with_original_language: String
+    ): Call<MovieList>
+
     //TV
 
     @GET("tv/popular")
@@ -86,4 +104,14 @@ interface API {
         @Query("api_key") api_key: String,
         @Query("language") language: String
     ): Call<Videos>
+
+    @GET("discover/tv")
+    fun getDiscoverTv(
+        @Query("api_key") api_key: String,
+        @Query("sort_by") sort_by: String,
+        @Query("first_air_date_year") first_air_date_year: Int?,
+        @Query("page") page: Int,
+        @Query("with_genres") with_genres: String,
+        @Query("with_original_language") with_original_language: String
+    ): Call<TvList>
 }

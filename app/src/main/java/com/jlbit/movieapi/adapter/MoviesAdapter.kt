@@ -8,7 +8,7 @@ import com.bumptech.glide.Glide
 import com.jlbit.movieapi.MainActivity
 import com.jlbit.movieapi.R
 import com.jlbit.movieapi.client.Request
-import com.jlbit.movieapi.fragment.MovieDetailFragment
+import com.jlbit.movieapi.fragment.movie.MovieDetailFragment
 import com.jlbit.movieapi.model.Movie
 import kotlinx.android.synthetic.main.item.view.*
 import org.jetbrains.anko.backgroundColor
@@ -39,6 +39,7 @@ class MoviesAdapter(private val movies: ArrayList<Movie>,
             1 -> holder.textType.text = movies[position].popularity.toString()
             2 -> holder.textType.text = movies[position].vote_average.toString()
             3 -> holder.textType.text = movies[position].release_date
+            4 -> holder.textType.text = mainActivity.getString(R.string.movies)
         }
 
         holder.textName.text = movies[position].title

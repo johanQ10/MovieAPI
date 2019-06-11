@@ -1,4 +1,4 @@
-package com.jlbit.movieapi.fragment
+package com.jlbit.movieapi.fragment.movie
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -34,7 +34,7 @@ class MoviePopularFragment : Fragment() {
         mainActivity = activity as MainActivity
         request = Request(context!!)
 
-        mainActivity.actionBar.title = "   ${getString(R.string.movies)}     "
+        mainActivity.actionBar.title = "   ${getString(R.string.movies)}"
 
         recyclerView = v.recycler_view
 

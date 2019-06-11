@@ -1,4 +1,4 @@
-package com.jlbit.movieapi.fragment
+package com.jlbit.movieapi.fragment.movie
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -10,19 +10,19 @@ import android.view.View
 import android.view.ViewGroup
 import com.jlbit.movieapi.MainActivity
 import com.jlbit.movieapi.R
-import com.jlbit.movieapi.adapter.TvAdapter
+import com.jlbit.movieapi.adapter.MoviesAdapter
 import com.jlbit.movieapi.client.Request
-import com.jlbit.movieapi.model.TvList
+import com.jlbit.movieapi.model.MovieList
 import kotlinx.android.synthetic.main.fragment_popular.view.*
 import org.jetbrains.anko.support.v4.longToast
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class TvTopRatedFragment : Fragment() {
+class MovieTopRatedFragment : Fragment() {
     private lateinit var mainActivity: MainActivity
     private lateinit var request: Request
-    private lateinit var tvList: TvList
+    private lateinit var movieList: MovieList
     private var page: Int = 1
 
     private lateinit var recyclerView: RecyclerView
@@ -34,7 +34,7 @@ class TvTopRatedFragment : Fragment() {
         mainActivity = activity as MainActivity
         request = Request(context!!)
 
-        mainActivity.actionBar.title = "   ${getString(R.string.tv_series)}"
+        mainActivity.actionBar.title = "   ${getString(R.string.movies)}"
 
         recyclerView = v.recycler_view
 
@@ -46,24 +46,24 @@ class TvTopRatedFragment : Fragment() {
 
         recyclerView.layoutManager = LinearLayoutManager(context)
 
-        getTvList(request.apiKey,"",page)
+        getMovieList(request.apiKey,"",page,"")
 
         return v
     }
 
-    private fun getTvList(api_key: String, language: String, page: Int){
-        val call = request.retrofit().getTvTopRated(api_key, language, page)
+    private fun getMovieList(api_key: String, language: String, page: Int, region: String){
+        val call = request.retrofit().getMovieTopRated(api_key, language, page, region)
 
-        call.enqueue(object : Callback<TvList> {
-            override fun onResponse(call: Call<TvList>, response: Response<TvList>) {
+        call.enqueue(object : Callback<MovieList> {
+            override fun onResponse(call: Call<MovieList>, response: Response<MovieList>) {
                 if(response.isSuccessful){
 
-                    tvList = response.body()!!
-                    recyclerView.adapter = TvAdapter(tvList.results, mainActivity, request, 2)
+                    movieList = response.body()!!
+                    recyclerView.adapter = MoviesAdapter(movieList.results, mainActivity, request, 2)
 
                 }else longToast("${response.code()}: ${response.message()}")
             }
-            override fun onFailure(call: Call<TvList>, t: Throwable) {
+            override fun onFailure(call: Call<MovieList>, t: Throwable) {
                 longToast(t.message.toString())
             }
         })

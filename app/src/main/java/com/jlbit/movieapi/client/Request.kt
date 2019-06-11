@@ -4,8 +4,6 @@ import android.content.Context
 import android.content.Context.CONNECTIVITY_SERVICE
 import android.net.ConnectivityManager
 import android.net.NetworkInfo
-import android.support.v4.content.ContextCompat.getSystemService
-import com.jlbit.movieapi.MainActivity
 import okhttp3.Cache
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
@@ -19,7 +17,6 @@ class Request(context: Context) {
 
     private val cacheSize = (10 * 1024 * 1024).toLong()
     private val myCache = Cache(context.cacheDir, cacheSize)
-
 
     private val okHttpClient: OkHttpClient = OkHttpClient.Builder()
         .cache(myCache)

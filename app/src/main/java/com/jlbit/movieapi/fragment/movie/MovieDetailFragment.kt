@@ -1,6 +1,5 @@
-package com.jlbit.movieapi.fragment
+package com.jlbit.movieapi.fragment.movie
 
-import android.annotation.SuppressLint
 import android.graphics.Typeface
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -14,8 +13,8 @@ import com.jlbit.movieapi.MainActivity
 
 import com.jlbit.movieapi.R
 import com.jlbit.movieapi.client.Request
+import com.jlbit.movieapi.model.MovieDetail
 import com.jlbit.movieapi.model.Videos
-import com.jlbit.movieapi.model.TvDetail
 import com.jlbit.movieapi.model.Video
 import kotlinx.android.synthetic.main.fragment_detail_movie.view.*
 import org.jetbrains.anko.*
@@ -25,11 +24,11 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class TvDetailFragment : Fragment(), YouTubePlayer.OnInitializedListener {
+class MovieDetailFragment : Fragment(), YouTubePlayer.OnInitializedListener {
     private lateinit var mainActivity: MainActivity
-    private lateinit var fragment: TvDetailFragment
+    private lateinit var fragment: MovieDetailFragment
     private lateinit var request: Request
-    private lateinit var tvDetail: TvDetail
+    private lateinit var movieDetail: MovieDetail
     private lateinit var videos: Videos
 
     private var videoKey = ""
@@ -47,7 +46,7 @@ class TvDetailFragment : Fragment(), YouTubePlayer.OnInitializedListener {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        val v = inflater.inflate(R.layout.fragment_detail_tv, container, false)
+        val v = inflater.inflate(R.layout.fragment_detail_movie, container, false)
 
         mainActivity = activity as MainActivity
         fragment = this
@@ -64,7 +63,7 @@ class TvDetailFragment : Fragment(), YouTubePlayer.OnInitializedListener {
         textVotesAverage = v.text_votes_average
         linearVideos = v.linear_videos
 
-        getTv(mainActivity.itemSelectedId, request.apiKey,"", "")
+        getMovie(mainActivity.itemSelectedId, request.apiKey,"", "")
 
         return v
     }
@@ -76,49 +75,48 @@ class TvDetailFragment : Fragment(), YouTubePlayer.OnInitializedListener {
         return super.onCreateOptionsMenu(menu,inflater)
     }
 
-    private fun getTv(tv_id: Int, api_key: String, language: String, append_to_response: String){
-        val call = request.retrofit().getTvDetail(tv_id, api_key, language, append_to_response)
+    private fun getMovie(movieId: Int, api_key: String, language: String, append_to_response: String){
+        val call = request.retrofit().getMovieDetail(movieId, api_key, language, append_to_response)
 
-        call.enqueue(object : Callback<TvDetail> {
-            @SuppressLint("SetTextI18n")
-            override fun onResponse(call: Call<TvDetail>, response: Response<TvDetail>) {
+        call.enqueue(object : Callback<MovieDetail> {
+            override fun onResponse(call: Call<MovieDetail>, response: Response<MovieDetail>) {
                 if(response.isSuccessful){
 
-                    tvDetail = response.body()!!
+                    movieDetail = response.body()!!
 
-                    getVideos(tv_id,api_key,language)
+                    getVideos(movieId,api_key,language)
 
                     Glide
                         .with(mainActivity)
-                        .load("${request.urlImage}${tvDetail.poster_path}")
+                        .load("${request.urlImage}${movieDetail.poster_path}")
                         .centerCrop()
                         .thumbnail(0.1f)
                         .placeholder(R.drawable.load)
                         .error(R.drawable.error)
                         .into(imageItem)
 
-                    mainActivity.actionBar.title = "   ${tvDetail.name}"
+                    mainActivity.actionBar.title = "   ${movieDetail.title}"
 
-                    textTitle.text = tvDetail.original_name
-                    textDate.text = "${tvDetail.first_air_date} - ${tvDetail.last_air_date}"
-                    textLanguage.text = tvDetail.original_language
-                    textWeb.text = tvDetail.homepage
+                    textTitle.text = movieDetail.original_title
+                    textDate.text = movieDetail.release_date
+                    textLanguage.text = movieDetail.original_language
+                    textWeb.text = movieDetail.homepage
 
-                    textOverview.text = tvDetail.overview
-                    textPopularity.text = tvDetail.popularity.toString()
-                    textVotes.text = tvDetail.vote_count.toString()
-                    textVotesAverage.text = tvDetail.vote_average.toString()
+                    textOverview.text = movieDetail.overview
+                    textPopularity.text = movieDetail.popularity.toString()
+                    textVotes.text = movieDetail.vote_count.toString()
+                    textVotesAverage.text = movieDetail.vote_average.toString()
 
                 }else longToast("${response.code()}: ${response.message()}")
             }
-            override fun onFailure(call: Call<TvDetail>, t: Throwable) {
+            override fun onFailure(call: Call<MovieDetail>, t: Throwable) {
                 longToast(t.message.toString())
             }
         })
     }
 
     private fun getVideos(movieId: Int, api_key: String, language: String){
-        val call = request.retrofit().getTvVideos(movieId, api_key, language)
+        val call = request.retrofit().getMovieVideos(movieId, api_key, language)
 
         call.enqueue(object : Callback<Videos> {
             override fun onResponse(call: Call<Videos>, response: Response<Videos>) {
@@ -132,7 +130,10 @@ class TvDetailFragment : Fragment(), YouTubePlayer.OnInitializedListener {
 
                             val ll = LinearLayout(mainActivity)
 
-                            ll.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT)
+                            val lp = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT)
+                            lp.setMargins(0,5,0,5)
+
+                            ll.layoutParams = lp
                             ll.gravity = Gravity.CENTER
                             ll.padding = 10
 
@@ -150,7 +151,7 @@ class TvDetailFragment : Fragment(), YouTubePlayer.OnInitializedListener {
                             val iv = ImageView(mainActivity)
 
                             val ip = LinearLayout.LayoutParams(50, 50)
-                            ip.setMargins(10,10,10,10)
+                            ip.setMargins(10,15,10,15)
 
                             iv.layoutParams = ip
                             iv.image = resources.getDrawable(R.drawable.play)

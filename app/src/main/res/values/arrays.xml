@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="sort_key_array">
+        <item>popularity.asc</item>
+        <item>popularity.desc</item>
+        <item>release_date.asc</item>
+        <item>release_date.desc</item>
+        <item>revenue.asc</item>
+        <item>revenue.desc</item>
+        <item>primary_release_date.asc</item>
+        <item>primary_release_date.desc</item>
+        <item>original_title.asc</item>
+        <item>original_title.desc</item>
+        <item>vote_average.asc</item>
+        <item>vote_average.desc</item>
+        <item>vote_count.asc</item>
+        <item>vote_count.desc</item>
+    </string-array>
+
+    <string-array name="sort_value_array">
+        <item>Popularity (asc)</item>
+        <item>Popularity (desc)</item>
+        <item>Release date (asc)</item>
+        <item>Release date (desc)</item>
+        <item>Revenue (asc)</item>
+        <item>Revenue (desc)</item>
+        <item>Primary release date (asc)</item>
+        <item>Primary release date (desc)</item>
+        <item>Original title (asc)</item>
+        <item>Original title (desc)</item>
+        <item>Vote average (asc)</item>
+        <item>Vote average (desc)</item>
+        <item>Vote count (asc)</item>
+        <item>Vote count (desc)</item>
+    </string-array>
+</resources>

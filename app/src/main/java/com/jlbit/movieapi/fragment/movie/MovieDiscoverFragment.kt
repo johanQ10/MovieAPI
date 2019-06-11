@@ -1,4 +1,4 @@
-package com.jlbit.movieapi.fragment
+package com.jlbit.movieapi.fragment.movie
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.jlbit.movieapi.MainActivity
+
 import com.jlbit.movieapi.R
 import com.jlbit.movieapi.adapter.MoviesAdapter
 import com.jlbit.movieapi.client.Request
@@ -19,7 +20,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class MovieUpcomingFragment : Fragment() {
+class MovieDiscoverFragment : Fragment() {
     private lateinit var mainActivity: MainActivity
     private lateinit var request: Request
     private lateinit var movieList: MovieList
@@ -29,12 +30,12 @@ class MovieUpcomingFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        val v = inflater.inflate(R.layout.fragment_upcoming, container, false)
+        val v = inflater.inflate(R.layout.fragment_movie_discover, container, false)
 
         mainActivity = activity as MainActivity
         request = Request(context!!)
 
-        mainActivity.actionBar.title = "   ${getString(R.string.movies)}     "
+        mainActivity.actionBar.title = "   ${getString(R.string.movies)}"
 
         recyclerView = v.recycler_view
 
@@ -46,20 +47,24 @@ class MovieUpcomingFragment : Fragment() {
 
         recyclerView.layoutManager = LinearLayoutManager(context)
 
-        getMovieList(request.apiKey,"",page,"")
+        getMovieList(request.apiKey,mainActivity.filter.sort_by,mainActivity.filter.include_adult,
+            mainActivity.filter.include_video,page,mainActivity.filter.with_genres,mainActivity.filter.year,
+            mainActivity.filter.with_original_language)
 
         return v
     }
 
-    private fun getMovieList(api_key: String, language: String, page: Int, region: String){
-        val call = request.retrofit().getMovieUpcoming(api_key, language, page, region)
+    private fun getMovieList(api_key: String, sort_by: String, include_adult: Boolean, include_video: Boolean,
+                             page: Int, with_genres: String, year: Int?, with_original_language: String){
+
+        val call = request.retrofit().getDiscoverMovies(api_key,sort_by,include_adult,include_video,page,with_genres,year,with_original_language)
 
         call.enqueue(object : Callback<MovieList> {
             override fun onResponse(call: Call<MovieList>, response: Response<MovieList>) {
                 if(response.isSuccessful){
 
                     movieList = response.body()!!
-                    recyclerView.adapter = MoviesAdapter(movieList.results, mainActivity, request, 3)
+                    recyclerView.adapter = MoviesAdapter(movieList.results, mainActivity, request, 4)
 
                 }else longToast("${response.code()}: ${response.message()}")
             }

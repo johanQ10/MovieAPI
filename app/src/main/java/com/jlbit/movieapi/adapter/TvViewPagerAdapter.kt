@@ -2,12 +2,10 @@ package com.jlbit.movieapi.adapter
 
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
-import android.support.v4.app.FragmentPagerAdapter
 import android.support.v4.app.FragmentStatePagerAdapter
-import android.util.Log
-import com.jlbit.movieapi.MainActivity
-import com.jlbit.movieapi.R
-import com.jlbit.movieapi.fragment.*
+import com.jlbit.movieapi.fragment.tv.TvPopularFragment
+import com.jlbit.movieapi.fragment.tv.TvTopRatedFragment
+import com.jlbit.movieapi.fragment.tv.TvUpcomingFragment
 
 class TvViewPagerAdapter(fm: FragmentManager?,
                          private var totalTabs: Int) : FragmentStatePagerAdapter(fm) {
