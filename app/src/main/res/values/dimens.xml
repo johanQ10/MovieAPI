@@ -1,0 +1,5 @@
+<resources>
+    <dimen name="text_title">16sp</dimen>
+    <dimen name="text_default">14sp</dimen>
+    <dimen name="text_min">12sp</dimen>
+</resources>

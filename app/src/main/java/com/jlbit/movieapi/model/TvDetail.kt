@@ -1,0 +1,32 @@
+package com.jlbit.movieapi.model
+
+data class TvDetail(
+    val backdrop_path: String?,
+    val created_by: ArrayList<CreatedBy>,
+    val episode_run_time: ArrayList<Int>,
+    val first_air_date: String,
+    val genre_ids: ArrayList<Genre>,
+    val homepage: String?,
+    val id: Int,
+    val in_production: Boolean,
+    val languages: ArrayList<String>,
+    val last_air_date: String,
+    val last_episode_to_air: Episode?,
+    val name: String,
+    val next_episode_to_air: Episode?,
+    val networks: ArrayList<Network>,
+    val number_of_episodes: Int,
+    val number_of_seasons: Int,
+    val origin_country: ArrayList<String>,
+    val original_language: String,
+    val original_name: String,
+    val overview: String,
+    val popularity: Float,
+    val poster_path: String?,
+    val production_companies: ArrayList<ProductionCompanie>,
+    val seasons: ArrayList<Season>,
+    val status: String,
+    val type: String,
+    val vote_average: Float,
+    val vote_count: Int
+)
