@@ -34,9 +34,9 @@ class TvUpcomingFragment : Fragment() {
         val v = inflater.inflate(R.layout.fragment_upcoming, container, false)
 
         mainActivity = activity as MainActivity
-        request = Request()
+        request = Request(context!!)
 
-        mainActivity.actionBar.title = getString(R.string.tv_series)
+        mainActivity.actionBar.title = "   ${getString(R.string.tv_series)}"
 
         recyclerView = v.recycler_view
 

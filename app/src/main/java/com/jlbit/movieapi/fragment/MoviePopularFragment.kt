@@ -32,9 +32,9 @@ class MoviePopularFragment : Fragment() {
         val v = inflater.inflate(R.layout.fragment_popular, container, false)
 
         mainActivity = activity as MainActivity
-        request = Request()
+        request = Request(context!!)
 
-        mainActivity.actionBar.title = getString(R.string.movies)
+        mainActivity.actionBar.title = "   ${getString(R.string.movies)}     "
 
         recyclerView = v.recycler_view
 

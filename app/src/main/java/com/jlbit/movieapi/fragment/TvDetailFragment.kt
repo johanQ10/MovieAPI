@@ -51,7 +51,7 @@ class TvDetailFragment : Fragment(), YouTubePlayer.OnInitializedListener {
 
         mainActivity = activity as MainActivity
         fragment = this
-        request = Request()
+        request = Request(context!!)
 
         imageItem = v.image_item
         textTitle = v.text_title
@@ -97,7 +97,7 @@ class TvDetailFragment : Fragment(), YouTubePlayer.OnInitializedListener {
                         .error(R.drawable.error)
                         .into(imageItem)
 
-                    mainActivity.actionBar.title = tvDetail.name
+                    mainActivity.actionBar.title = "   ${tvDetail.name}"
 
                     textTitle.text = tvDetail.original_name
                     textDate.text = "${tvDetail.first_air_date} - ${tvDetail.last_air_date}"
@@ -164,7 +164,7 @@ class TvDetailFragment : Fragment(), YouTubePlayer.OnInitializedListener {
                             if(i < videos.results.size - 1){
                                 val view = View(mainActivity)
 
-                                view.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,5)
+                                view.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,2)
                                 view.backgroundColor = resources.getColor(R.color.blue)
 
                                 linearVideos.addView(view)

@@ -50,7 +50,7 @@ class MovieDetailFragment : Fragment(), YouTubePlayer.OnInitializedListener {
 
         mainActivity = activity as MainActivity
         fragment = this
-        request = Request()
+        request = Request(context!!)
 
         imageItem = v.image_item
         textTitle = v.text_title
@@ -95,7 +95,7 @@ class MovieDetailFragment : Fragment(), YouTubePlayer.OnInitializedListener {
                         .error(R.drawable.error)
                         .into(imageItem)
 
-                    mainActivity.actionBar.title = movieDetail.title
+                    mainActivity.actionBar.title = "   ${movieDetail.title}"
 
                     textTitle.text = movieDetail.original_title
                     textDate.text = movieDetail.release_date
@@ -130,7 +130,10 @@ class MovieDetailFragment : Fragment(), YouTubePlayer.OnInitializedListener {
 
                             val ll = LinearLayout(mainActivity)
 
-                            ll.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT)
+                            val lp = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT)
+                            lp.setMargins(0,5,0,5)
+
+                            ll.layoutParams = lp
                             ll.gravity = Gravity.CENTER
                             ll.padding = 10
 
@@ -148,7 +151,7 @@ class MovieDetailFragment : Fragment(), YouTubePlayer.OnInitializedListener {
                             val iv = ImageView(mainActivity)
 
                             val ip = LinearLayout.LayoutParams(50, 50)
-                            ip.setMargins(10,10,10,10)
+                            ip.setMargins(10,15,10,15)
 
                             iv.layoutParams = ip
                             iv.image = resources.getDrawable(R.drawable.play)
@@ -162,7 +165,7 @@ class MovieDetailFragment : Fragment(), YouTubePlayer.OnInitializedListener {
                             if(i < videos.results.size - 1){
                                 val view = View(mainActivity)
 
-                                view.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,1)
+                                view.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,2)
                                 view.backgroundColor = resources.getColor(R.color.blue)
 
                                 linearVideos.addView(view)

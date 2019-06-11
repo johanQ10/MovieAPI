@@ -32,9 +32,9 @@ class MovieUpcomingFragment : Fragment() {
         val v = inflater.inflate(R.layout.fragment_upcoming, container, false)
 
         mainActivity = activity as MainActivity
-        request = Request()
+        request = Request(context!!)
 
-        mainActivity.actionBar.title = getString(R.string.movies)
+        mainActivity.actionBar.title = "   ${getString(R.string.movies)}     "
 
         recyclerView = v.recycler_view
 

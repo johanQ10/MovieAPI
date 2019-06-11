@@ -1,8 +1,11 @@
 package com.jlbit.movieapi
 
 import android.app.Dialog
+import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.net.ConnectivityManager
+import android.net.NetworkInfo
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.app.ActionBar
@@ -12,6 +15,7 @@ import android.view.Window
 import com.jlbit.movieapi.fragment.HomeFragment
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.dialog_options.*
+import okhttp3.Cache
 
 class MainActivity : AppCompatActivity() {
     lateinit var actionBar: ActionBar
@@ -27,16 +31,29 @@ class MainActivity : AppCompatActivity() {
         actionBar = supportActionBar!!
 
         actionBar.setDisplayShowHomeEnabled(true)
-        actionBar.setDisplayShowTitleEnabled(true)
         actionBar.setDisplayUseLogoEnabled(true)
+        actionBar.setDisplayShowTitleEnabled(true)
         actionBar.setLogo(R.drawable.tmdb)
 
-        actionBar.title = getString(R.string.app_name)
+        actionBar.title = getString(R.string.web_name)
 
         supportFragmentManager
             .beginTransaction()
             .add(R.id.frame_layout, HomeFragment())
             .commit()
+
+        val cacheSize = (5 * 1024 * 1024).toLong()
+        val myCache = Cache(cacheDir, cacheSize)
+    }
+
+    fun hasNetwork(context: Context): Boolean? {
+        var isConnected: Boolean? = false
+        val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val activeNetwork: NetworkInfo? = connectivityManager.activeNetworkInfo
+
+        if (activeNetwork != null && activeNetwork.isConnected) isConnected = true
+
+        return isConnected
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

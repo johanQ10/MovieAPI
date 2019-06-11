@@ -32,9 +32,9 @@ class TvPopularFragment : Fragment() {
         val v = inflater.inflate(R.layout.fragment_popular, container, false)
 
         mainActivity = activity as MainActivity
-        request = Request()
+        request = Request(context!!)
 
-        mainActivity.actionBar.title = getString(R.string.tv_series)
+        mainActivity.actionBar.title = "   ${getString(R.string.tv_series)}"
 
         recyclerView = v.recycler_view
 

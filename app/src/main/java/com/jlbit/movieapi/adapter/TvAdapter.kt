@@ -52,6 +52,7 @@ class TvAdapter(private val tvs: ArrayList<Tv>,
             mainActivity
                 .supportFragmentManager
                 .beginTransaction()
+                .setCustomAnimations(R.anim.enter_from_right,R.anim.exit_to_left)
                 .replace(R.id.frame_layout, TvDetailFragment())
                 .addToBackStack(null)
                 .commit()
