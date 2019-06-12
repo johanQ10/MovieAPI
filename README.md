@@ -1,5 +1,5 @@
 # MovieAPI
-
+NOTA: El archivo APK está en el directorio root del proyecto con el nombre "movieApi.apk".
 
 1. Las capas de la aplicación (por ejemplo capa de persistencia, vistas, red, negocio, etc) y qué clases pertenecen a cual.
 
