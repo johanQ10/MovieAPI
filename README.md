@@ -1,6 +1,4 @@
 # MovieAPI
-Prueba de README
-
 
 
 1. Las capas de la aplicación (por ejemplo capa de persistencia, vistas, red, negocio, etc) y qué clases pertenecen a cual.
