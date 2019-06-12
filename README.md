@@ -1,6 +1,4 @@
 # MovieAPI
-Prueba de README
-
 
 
 1. Las capas de la aplicación (por ejemplo capa de persistencia, vistas, red, negocio, etc) y qué clases pertenecen a cual.
@@ -42,6 +40,9 @@ R= A continuación la calsificación de las clases con su responsabilidad:
 - Clases en el directorio "model": representan los modelos o estructura de datos en las que almacenarán o recibirán dichos datos de las peticiones realizadas a la API.
 
 - Archivos layouts: representan las vistas o interfaces de usuario con las que interactua el mismo.
+
+
+
 
 1. En qué consiste el principio de responsabilidad única? Cuál es su propósito?
 
