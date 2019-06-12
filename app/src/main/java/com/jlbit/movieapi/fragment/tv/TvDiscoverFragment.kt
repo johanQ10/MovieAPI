@@ -66,6 +66,8 @@ class TvDiscoverFragment : Fragment() {
                     tvList = response.body()!!
                     recyclerView.adapter = TvAdapter(tvList.results, mainActivity, request, 4)
 
+                    if(tvList.total_results == 0) longToast("There are no elements for the search")
+
                 }else longToast("${response.code()}: ${response.message()}")
             }
             override fun onFailure(call: Call<TvList>, t: Throwable) {

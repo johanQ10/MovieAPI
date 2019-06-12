@@ -66,6 +66,8 @@ class MovieDiscoverFragment : Fragment() {
                     movieList = response.body()!!
                     recyclerView.adapter = MoviesAdapter(movieList.results, mainActivity, request, 4)
 
+                    if(movieList.total_results == 0) longToast("There are no elements for the search")
+
                 }else longToast("${response.code()}: ${response.message()}")
             }
             override fun onFailure(call: Call<MovieList>, t: Throwable) {
