@@ -43,6 +43,9 @@ R= A continuación la calsificación de las clases con su responsabilidad:
 
 - Archivos layouts: representan las vistas o interfaces de usuario con las que interactua el mismo.
 
+
+
+
 1. En qué consiste el principio de responsabilidad única? Cuál es su propósito?
 
 R= Es un principio que indica básicamente que un objeto o clase debe realizar una única cosa o cumplir una única función. El propósito de este principio es establecer una especie de "regla" para crear software de calidad, definiendo una función específica para cada clase y objeto creado.
